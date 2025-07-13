@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Chatbot Flow Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based visual flow builder for creating chatbot conversation flows using React Flow.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### ✅ Implemented Features
 
-### `npm start`
+1. **Text Node**
+   - Drag and drop text message nodes
+   - Edit message content in settings panel
+   - Visual representation with message icon
+   - Source and target handles for connections
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Nodes Panel**
+   - Extensible design for adding new node types
+   - Drag and drop functionality
+   - Currently supports Message nodes
+   - Easy to extend for future node types
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Settings Panel**
+   - Appears when a node is selected
+   - Text editing for message nodes
+   - Back button to return to nodes panel
+   - Extensible for different node types
 
-### `npm test`
+4. **Flow Builder**
+   - Visual flow creation with React Flow
+   - Drag and drop nodes from panel
+   - Connect nodes with edges
+   - Zoom, pan, and minimap controls
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. **Connection Rules**
+   - Source handle: Only one outgoing connection
+   - Target handle: Multiple incoming connections allowed
+   - Visual feedback for connections
 
-### `npm run build`
+6. **Save Functionality**
+   - Validates flow before saving
+   - Error message if more than one node has empty target handles
+   - Success confirmation on valid save
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
 
-### `npm run eject`
+1. **Adding Nodes**: Drag the Message node from the Nodes Panel to the flow area
+2. **Connecting Nodes**: Click and drag from a source handle (bottom) to a target handle (top)
+3. **Editing Nodes**: Click on a node to select it and edit its text in the Settings Panel
+4. **Saving Flow**: Click "Save Changes" to validate and save the flow
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technical Details
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Architecture
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React Flow**: Core flow building functionality
+- **Component Structure**: Modular, extensible design
+- **State Management**: React hooks for local state
+- **Styling**: Custom CSS with responsive design
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Key Components
 
-## Learn More
+- `FlowBuilder`: Main component managing the flow state
+- `TextNode`: Custom node component for text messages
+- `NodesPanel`: Draggable node types panel
+- `SettingsPanel`: Node editing interface
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Connection Logic
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Source handles enforce single outgoing connection
+- Target handles allow multiple incoming connections
+- Validation prevents invalid flow structures
 
-### Code Splitting
+### Save Validation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The save function validates that:
+- If there are multiple nodes, only one can have an empty target handle
+- This ensures proper flow structure for chatbot execution
 
-### Analyzing the Bundle Size
+## Extending the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Adding New Node Types
 
-### Making a Progressive Web App
+1. Create a new node component (e.g., `ImageNode.js`)
+2. Add it to the `nodeTypes` object in `FlowBuilder.js`
+3. Add the node to `NodesPanel.js` with drag functionality
+4. Add settings for the node type in `SettingsPanel.js`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Example: Adding an Image Node
 
-### Advanced Configuration
+```javascript
+// ImageNode.js
+const ImageNode = ({ data, selected }) => {
+  return (
+    <div className={`image-node ${selected ? 'selected' : ''}`}>
+      <Handle type="target" position={Position.Top} />
+      <div className="node-header">
+        <span>🖼️</span>
+        <span>Send Image</span>
+      </div>
+      <div className="node-content">
+        <img src={data.imageUrl} alt="Preview" />
+      </div>
+      <Handle type="source" position={Position.Bottom} />
+    </div>
+  );
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## File Structure
 
-### Deployment
+```
+src/
+├── components/
+│   ├── FlowBuilder.js      # Main flow builder component
+│   ├── FlowBuilder.css     # Styles for all components
+│   ├── TextNode.js         # Text message node component
+│   ├── NodesPanel.js       # Draggable nodes panel
+│   ├── SettingsPanel.js    # Node editing panel
+│   └── index.js            # Component exports
+├── App.js                  # Main app component
+├── App.css                 # App-level styles
+└── index.js                # React entry point
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+

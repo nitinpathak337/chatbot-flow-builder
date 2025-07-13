@@ -1,0 +1,356 @@
+/* FlowBuilder main container */
+.flow-builder {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+/* Top bar with save button */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.save-button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.save-button:hover {
+  background-color: #3367d6;
+}
+
+/* Snackbar alert - base styles */
+.snackbar-alert {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Error variant */
+.snackbar-alert.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+/* Success variant */
+.snackbar-alert.success {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.alert-icon {
+  font-size: 16px;
+}
+
+.alert-text {
+  font-weight: 500;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Flow container */
+.flow-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Main flow area */
+.flow-main {
+  flex: 1;
+  height: 100%;
+  background-color: #fafafa;
+}
+
+/* Side panel */
+.side-panel {
+  width: 300px;
+  background-color: white;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Panel header */
+.panel-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Nodes Panel Styles */
+.nodes-list {
+  padding: 20px;
+}
+
+.node-item {
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: grab;
+  transition: all 0.2s;
+  background-color: white;
+}
+
+.node-item:hover {
+  border-color: #4285f4;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.2);
+}
+
+.node-item:active {
+  cursor: grabbing;
+}
+
+.node-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.message-icon {
+  font-size: 16px;
+}
+
+.node-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.node-description {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Settings Panel Styles */
+.settings-content {
+  padding: 20px;
+}
+
+.setting-group {
+  margin-bottom: 20px;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+/* Text Node Styles */
+.text-node {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.text-node.selected {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.text-node:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background-color: #e8f5e8;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 6px 6px 0 0;
+}
+
+.node-header .message-icon {
+  font-size: 14px;
+}
+
+.node-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.node-content {
+  padding: 12px;
+}
+
+.message-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Handle Styles */
+.target-handle {
+  background-color: #4285f4;
+  width: 10px;
+  height: 10px;
+  border: 2px solid white;
+  border-radius: 50%;
+  left: -5px;
+}
+
+.source-handle {
+  background-color: #4285f4;
+  width: 10px;
+  height: 10px;
+  border: 2px solid white;
+  border-radius: 50%;
+  right: -5px;
+}
+
+.target-handle:hover,
+.source-handle:hover {
+  background-color: #3367d6;
+}
+
+/* React Flow Customizations */
+.react-flow__node {
+  font-family: inherit;
+}
+
+.react-flow__edge {
+  stroke: #4285f4;
+  stroke-width: 2;
+}
+
+.react-flow__edge.selected {
+  stroke: #3367d6;
+}
+
+.react-flow__edge-path {
+  stroke: #4285f4;
+  stroke-width: 2;
+}
+
+.react-flow__connection-line {
+  stroke: #4285f4;
+  stroke-width: 2;
+}
+
+.react-flow__controls {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.react-flow__controls button {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.react-flow__controls button:hover {
+  background-color: #f5f5f5;
+}
+
+.react-flow__minimap {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .side-panel {
+    width: 250px;
+  }
+  
+  .flow-container {
+    flex-direction: column;
+  }
+  
+  .side-panel {
+    width: 100%;
+    height: 300px;
+    border-left: none;
+    border-top: 1px solid #e0e0e0;
+  }
+} 
